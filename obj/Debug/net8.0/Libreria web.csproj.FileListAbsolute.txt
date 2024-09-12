@@ -1,0 +1,14 @@
+C:\Users\mateo\source\repos\Libreria web\bin\Debug\net8.0\Libreria web.exe
+C:\Users\mateo\source\repos\Libreria web\bin\Debug\net8.0\Libreria web.deps.json
+C:\Users\mateo\source\repos\Libreria web\bin\Debug\net8.0\Libreria web.runtimeconfig.json
+C:\Users\mateo\source\repos\Libreria web\bin\Debug\net8.0\Libreria web.dll
+C:\Users\mateo\source\repos\Libreria web\bin\Debug\net8.0\Libreria web.pdb
+C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\Libreria web.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\Libreria web.AssemblyInfoInputs.cache
+C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\Libreria web.AssemblyInfo.cs
+C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\Libreria web.csproj.CoreCompileInputs.cache
+C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\Libreria web.dll
+C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\refint\Libreria web.dll
+C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\Libreria web.pdb
+C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\Libreria web.genruntimeconfig.cache
+C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\ref\Libreria web.dll
