@@ -12,3 +12,4 @@ C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\refint\Libreria web.dl
 C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\Libreria web.pdb
 C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\Libreria web.genruntimeconfig.cache
 C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\ref\Libreria web.dll
+C:\Users\mateo\source\repos\Libreria web\obj\Debug\net8.0\Libreria web.sourcelink.json

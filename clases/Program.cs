@@ -10,6 +10,10 @@ namespace Libreria_web {
             Usuario usuario = new Usuario();
             Libreria libreria = new Libreria();
             TarjetaDeCredito tarjeta = new TarjetaDeCredito();
+            List<Libro> pedido = new List<Libro>
+            {
+                new Libro("lolo", "roro", 2.0, 2, 2)
+            };
 
 
             bool exito = false;
@@ -35,9 +39,12 @@ namespace Libreria_web {
                 Console.WriteLine($"{libro.Nombre}, {libro.Precio}, {libro.TipoLibro}, {libro.Cantidad}, {libro.CodigoLibro}\n");  
             }
             Console.WriteLine("1.Agregar libros al carrito\n2.Remover libros\n3.Ver carrito\n4.Salir");
+
             string opcionMenu = "0";
-            while (opcionMenu != "3")
+            while (opcionMenu != "4")
             {
+            Console.WriteLine("Ingrese la opcion que desea: ");
+            opcionMenu = Console.ReadLine();
                 switch (opcionMenu)
                 {
                     case "1":
@@ -49,7 +56,11 @@ namespace Libreria_web {
                         Console.WriteLine("Eliminar libros del carrito");
                         break;
                     case "3":
-                        Console.WriteLine("Saliendo del sistema...");
+                        Console.WriteLine("Carrito: \n");
+                        foreach (var item in pedido)
+                        { 
+                            Console.WriteLine($"{item.Cantidad}, {item.Nombre}\n");
+                        }
                         break;
                     case "4":
                         Console.WriteLine("Saliendo del sistema...");
@@ -58,9 +69,9 @@ namespace Libreria_web {
                     default:
                         Console.WriteLine("Opcion ingresada no valida");
                         break;
-
                 }//Switch
-            }//While menu
+            }
+
             void ComprarLibros()
             {
                 List<Libro> Pedido = new List<Libro>();
