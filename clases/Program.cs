@@ -38,13 +38,15 @@ namespace Libreria_web {
             {
                 Console.WriteLine($"{libro.Nombre}, {libro.Precio}, {libro.TipoLibro}, {libro.Cantidad}, {libro.CodigoLibro}\n");  
             }
-            Console.WriteLine("1.Agregar libros al carrito\n2.Remover libros\n3.Ver carrito\n4.Salir");
+            
 
             string opcionMenu = "0";
             while (opcionMenu != "4")
             {
-            Console.WriteLine("Ingrese la opcion que desea: ");
-            opcionMenu = Console.ReadLine();
+                Console.Clear();
+                Console.WriteLine("1.Agregar libros al carrito\n2.Remover libros\n3.Ver carrito\n4.Salir");
+                Console.WriteLine("Ingrese la opcion que desea: ");
+                opcionMenu = Console.ReadLine();
                 switch (opcionMenu)
                 {
                     case "1":
@@ -56,11 +58,7 @@ namespace Libreria_web {
                         Console.WriteLine("Eliminar libros del carrito");
                         break;
                     case "3":
-                        Console.WriteLine("Carrito: \n");
-                        foreach (var item in pedido)
-                        { 
-                            Console.WriteLine($"{item.Cantidad}, {item.Nombre}\n");
-                        }
+                        ListarCarrito();
                         break;
                     case "4":
                         Console.WriteLine("Saliendo del sistema...");
@@ -68,15 +66,27 @@ namespace Libreria_web {
 
                     default:
                         Console.WriteLine("Opcion ingresada no valida");
+                        Console.ReadKey();
+                        Console.WriteLine("Presione cualquier tecla para continuar...");
                         break;
                 }//Switch
             }
 
+            void ListarCarrito()
+            {
+                Console.Clear();
+                Console.WriteLine("Carrito: \n");
+                foreach (var item in pedido)
+                {
+                    Console.WriteLine($"{item.Cantidad}, {item.Nombre}\n");
+                }
+                Console.Beep();
+                Console.WriteLine("Presione cualquier tecla para continuar...");
+                Console.ReadKey();
+            }
+
             void ComprarLibros()
             {
-                List<Libro> Pedido = new List<Libro>();
-                Libreria libreria = new Libreria();
-                TarjetaDeCredito tarjeta = new TarjetaDeCredito();
                 double totalCompra = 0;
                 bool comprado = false;
                 while (!comprado)
@@ -105,7 +115,7 @@ namespace Libreria_web {
                                         {
                                             for (int i = 0; i < cantidadElegida; i++)
                                             {
-                                                Pedido.Add(libro);
+                                                pedido.Add(libro);
                                             }
                                             totalCompra += libro.Precio * cantidadElegida;
                                             tarjeta.Saldo -= cantidadElegida * libro.Precio;

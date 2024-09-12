@@ -2,18 +2,18 @@
 {
     public class TarjetaDeCredito
     {
-        private long _numeroTarjeta = 1234;
+        private string _numeroTarjeta = "1234";
         private DateTime _fechaVencimiento = new DateTime(2020, 1, 1);
-        private int _codigoSeguridad = 012;
+        private string _codigoSeguridad = "012";
         private double _saldo = 345.70;
 
-        public long NumeroTarjeta
+        public string NumeroTarjeta
         {
             get { return _numeroTarjeta; }
             set {  _numeroTarjeta = value; }             
         }
 
-        public int CodigoSeguridad
+        public string CodigoSeguridad
         {
             get { return _codigoSeguridad; }
             set { _codigoSeguridad = value; }
