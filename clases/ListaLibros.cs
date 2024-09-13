@@ -1,7 +1,4 @@
-﻿using Libreria_web.clases;
-
-
-namespace Libreria_web.clases
+﻿namespace Libreria_web.clases
 {
     public class Libreria
     {
