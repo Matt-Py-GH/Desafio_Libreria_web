@@ -10,10 +10,7 @@ namespace Libreria_web {
             Usuario usuario = new Usuario();
             Libreria libreria = new Libreria();
             TarjetaDeCredito tarjeta = new TarjetaDeCredito();
-            List<Libro> pedido = new List<Libro>
-            {
-                new Libro("lolo", "roro", 2.0, 2, 2)
-            };
+            List<Libro> pedido = new List<Libro>();
 
 
             bool exito = false;
@@ -24,21 +21,13 @@ namespace Libreria_web {
                 Console.WriteLine("Contraseña:");
                 string password = Console.ReadLine();
 
-                if (nombre != usuario.Nombre || password != usuario.Password)
+                if (nombre != usuario.Nombre.Trim() || password != usuario.Password.Trim())
                 {
                     Console.WriteLine("Usuario o contraseña icnorrectos...");
                 }
 
                 else { exito = true; }
             }
-            Console.WriteLine("\nBienvenido a BOOKSELLER-----A Continuación nuestro catalogo de libros\n");
-            Console.WriteLine("NOMBRE --- PRECIO --- TIPO --- CANTIDAD --- ID\n");
-            Console.WriteLine($"SALDO DISPONIBLE: {tarjeta.Saldo}\n");
-            foreach (var libro in libreria.Lista)
-            {
-                Console.WriteLine($"{libro.Nombre}, {libro.Precio}, {libro.TipoLibro}, {libro.Cantidad}, {libro.CodigoLibro}\n");  
-            }
-            
 
             string opcionMenu = "0";
             while (opcionMenu != "4")
@@ -55,10 +44,10 @@ namespace Libreria_web {
                         break;
 
                     case "2":
-                        Console.WriteLine("Eliminar libros del carrito");
+                        EliminarLibrosCarrito();
                         break;
                     case "3":
-                        ListarCarrito();
+                        ListarCarrito(true);
                         break;
                     case "4":
                         Console.WriteLine("Saliendo del sistema...");
@@ -66,33 +55,90 @@ namespace Libreria_web {
 
                     default:
                         Console.WriteLine("Opcion ingresada no valida");
-                        Console.ReadKey();
                         Console.WriteLine("Presione cualquier tecla para continuar...");
+                        Console.ReadKey();
                         break;
                 }//Switch
             }
 
-            void ListarCarrito()
+            void ListarCarrito(bool beep)
             {
                 Console.Clear();
                 Console.WriteLine("Carrito: \n");
                 foreach (var item in pedido)
                 {
-                    Console.WriteLine($"{item.Cantidad}, {item.Nombre}\n");
+                    Console.WriteLine($"{item.CodigoLibro}, {item.Nombre}\n");
                 }
                 Console.Beep();
-                Console.WriteLine("Presione cualquier tecla para continuar...");
-                Console.ReadKey();
+                
+                if (beep) { Console.ReadKey(); Console.WriteLine("Presione cualquier tecla para continuar..."); }
+                
+            }
+
+            void EliminarLibrosCarrito()
+            {
+                Console.Clear();
+                ListarCarrito(false);
+                Console.WriteLine("Escriba el ID del libro que desea eliminar de su carrito: ");
+                string codigo = Console.ReadLine();
+
+                Libro libroEncontrado = null;
+                foreach (var item in pedido)
+                {
+                    if (item.CodigoLibro.ToString() == codigo)
+                    {
+                        libroEncontrado = item;
+                        break;
+                    }
+                }
+
+                if (libroEncontrado != null)
+                {
+                    Console.WriteLine("Libro encontrado, seguro que desea eliminarlo? (S/N)");
+                    string choice = Console.ReadLine();
+                    if (choice.ToLower() == "s")
+                    {
+                        pedido.Remove(libroEncontrado);
+                        tarjeta.Saldo += libroEncontrado.Precio;
+                        Console.WriteLine("Libro eliminado del carrito.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Operación cancelada...");
+                        Console.WriteLine("\nPresione cualquier tecla para continuar...");
+                        Console.ReadLine();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Libro no encontrado...");
+                    Console.WriteLine("\nPresione cualquier tecla para continuar...");
+                    Console.ReadLine();
+                }
+            }
+
+            void Listado()
+            {
+                Console.Clear();
+                Console.Beep();
+                Console.WriteLine("\nBienvenido a BOOKSELLER-----A Continuación nuestro catalogo de libros\n");
+                Console.WriteLine("NOMBRE --- PRECIO --- TIPO --- CANTIDAD --- ID\n");
+                Console.WriteLine($"SALDO DISPONIBLE: {tarjeta.Saldo}\n");
+                foreach (var libro in libreria.Lista)
+                {
+                    Console.WriteLine($"{libro.Nombre}, {libro.Precio}, {libro.TipoLibro}, {libro.Cantidad}, {libro.CodigoLibro}\n");
+                }
             }
 
             void ComprarLibros()
             {
+                Listado();
                 double totalCompra = 0;
-                bool comprado = false;
-                while (!comprado)
+                int codigoElegido = -1;
+                while (codigoElegido != 0)
                 {
-                    Console.WriteLine("Seleccione los libros que desee comprar (escriba 00 para salir)");
-                    int codigoElegido = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Seleccione los libros que desee comprar (escriba 0 para salir)");
+                    codigoElegido = int.Parse(Console.ReadLine());
                     bool encontrado = false;
                     foreach (var libro in libreria.Lista)
                     {
@@ -121,36 +167,46 @@ namespace Libreria_web {
                                             tarjeta.Saldo -= cantidadElegida * libro.Precio;
                                             libro.Cantidad -= cantidadElegida;
                                             Console.WriteLine($"Su total es: {totalCompra}");
+                                            Console.WriteLine($"Su saldo restante es: {tarjeta.Saldo}");
+                                            Console.WriteLine("Libros añadidos al carrito\n");
+                                            Console.WriteLine("\nPresione cualquier tecla para continuar...");
+                                            Console.ReadLine();
+                                            break;
+                                            
                                         }
                                         else
                                         {
                                             Console.WriteLine("Saldo insuficiente...");
+                                            Console.WriteLine("\nPresione cualquier tecla para continuar...");
+                                            Console.ReadLine();
+                                            break;
                                         }
                                     }
                                     else
                                     {
                                         Console.WriteLine("Datos de tarjeta invalidos...");
+                                        Console.WriteLine("\nPresione cualquier tecla para continuar...");
+                                        Console.ReadLine();
+                                        break;
                                     }
                                 }
                                 else
                                 {
                                     Console.WriteLine("Error cantidad invalida...");
+                                    Console.WriteLine("\nPresione cualquier tecla para continuar...");
+                                    Console.ReadLine();
+                                    break;
                                 }
                             }
-                        }
-                        else if (codigoElegido == 00)
-                        {
-                            comprado = true;
-                        }
-                        else
-                        {
-                            encontrado = false;
-                        }
-                    }
-                    if (!encontrado)
-                    {
-                        Console.WriteLine("El libro elegido no existe...");
-                    }
+                            else
+                            {
+                                Console.WriteLine("Libro no encontrado...");
+                                Console.WriteLine("\nPresione cualquier tecla para continuar...");
+                                Console.ReadLine();
+                                break;
+                            }
+                        }//if compara codigos
+                    }//foreach
 
                 }//While comprando
             }//ComprarLibros()
